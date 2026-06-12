@@ -16,9 +16,11 @@
 *   **No Infrastructure Leakage:** Core logic functions should not be cluttered with presentation details. For instance, the RAG logic in `run_rag_localization` should return data structures (like a list of file paths), and a different function should handle printing that output to the console.
 *   **Configuration in `config.json`:** All configurable parameters for the RAG process (file paths, model names, thresholds) must be defined in `config.json`. Avoid hardcoding these values directly in the `instructor.py` script. A `DEFAULT_CONFIG` dictionary should only be used as a fallback.
 
-## 3. DEPENDENCY MANAGEMENT
+## 3. DEPENDENCY MANAGEMENT & ENVIRONMENT
 
-*   **Python Libraries:** Core dependencies like `sentence-transformers` and `numpy` are managed via `pip`. Any new library additions must be justified and documented.
+*   **Virtual Environment Isolation:** To prevent library conflicts and keep system environments clean, a local Python virtual environment (`.venv`) must always be used for development and runtime execution.
+*   **Self-Aware Launcher:** The execution launcher `agent-instructor` must be used to run the application, as it automatically detects and targets the local `.venv` Python interpreter without requiring manual shell activation.
+*   **Python Libraries:** Core dependencies like `sentence-transformers` and `numpy` are managed via `requirements.txt` and installed via `pip` within the `.venv`. Any new library additions must be justified, documented, and appended to `requirements.txt`.
 *   **External CLI Tools:** The project depends on `fabric-ai` being globally available. This is a critical dependency. The installation requirement (`pipx install fabric-ai`) must be checked for and clearly communicated in error messages if the tool is missing.
 
 ## 4. LOGGING AND ERROR HANDLING

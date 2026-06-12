@@ -51,10 +51,14 @@ The system is designed as a **stateless command-line orchestration script**. Its
 ```
 
 ### 2.1 Dependency and Environment
-1.  **Python Core:** The main logic resides in `instructor.py`. It requires Python 3 and specific libraries (`sentence-transformers`, `numpy`).
-2.  **External CLI Tool:** The system has a hard dependency on the `fabric-ai` CLI tool, which must be installed and available in the system's PATH. The script verifies its presence on startup.
+1.  **Python Core & Virtual Environment:** The main logic resides in `instructor.py`. It requires Python 3.8+ and specific libraries (`sentence-transformers`, `numpy`). To keep dependencies isolated, the orchestrator is designed to run within a local virtual environment (`.venv`). The launcher script (`agent-instructor`) is self-aware and automatically prioritizes execution via `.venv/bin/python` if it exists.
+2.  **External CLI Tool:** The system has a hard dependency on the `fabric-ai` CLI tool, which must be installed (e.g., via `pipx`) and available in the system's PATH. The script verifies its presence on startup.
 3.  **Local AI Models:** The RAG process downloads and uses a `sentence-transformers` model locally. The model name is specified in `config.json`.
-4.  **File-Based Contracts:** The orchestrator relies on the presence of specific files in the root directory to function:
+4.  **Global Execution Setup:** To run the orchestrator system-wide, the installation folder can be added to the user's shell PATH (e.g., in `.bashrc` or `.zshrc`):
+    ```bash
+    export PATH="/Volumes/ExtDrive/Home/rzavala/Documents/Projects/Koiosoft/agent-instructor:$PATH"
+    ```
+5.  **File-Based Contracts:** The orchestrator relies on the presence of specific files in the root directory to function:
     *   `CONVENTIONS.md`: Contains project-wide coding standards.
     *   `CUSTOM-PROMPT.txt`: System prompt for 'feature' mode.
     *   `CUSTOM-PROMPT-LOG.txt`: System prompt for 'bug' mode.
