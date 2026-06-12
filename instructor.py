@@ -21,7 +21,7 @@ import numpy as np  # type: ignore
 
 # --- CONFIGURACIÓN DE RUTAS ---
 ORCHESTRATOR_DIR = Path(__file__).resolve().parent
-ROOT_DIR = ORCHESTRATOR_DIR.parent
+ROOT_DIR = Path.cwd() 
 
 CONVENTIONS_PATH = ROOT_DIR / "CONVENTIONS.md"
 FEATURE_PROMPT_PATH = ROOT_DIR / "CUSTOM-PROMPT.txt"

@@ -1,0 +1,6 @@
+#!/bin/bash
+# Lanzador del orquestador agent-instructor
+# Usa el directorio actual como proyecto a analizar
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+python "$SCRIPT_DIR/instructor.py" "$@"
